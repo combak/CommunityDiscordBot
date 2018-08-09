@@ -1,0 +1,27 @@
+{
+  "name": "communitydiscordbot",
+  "version": "0.1.0",
+  "description": "Community Discord Bot",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \\\\\\\"Error: no test specified! Configure in package.json\\\\\\\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/combak/CommunityDiscordBot.git"
+  },
+  "keywords": [
+    "discord",
+    "bot"
+  ],
+  "author": "DerOli82",
+  "license": "GPL-3.0",
+  "bugs": {
+    "url": "https://github.com/combak/CommunityDiscordBot/issues"
+  },
+  "homepage": "https://github.com/combak/CommunityDiscordBot#readme",
+  "dependencies": {
+    "discord.js": "^11.3.2",
+    "github-api": "^3.0.0"
+  }
+}
