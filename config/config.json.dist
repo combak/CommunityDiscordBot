@@ -2,6 +2,9 @@
   "command": {
     "prefix": "!"
   },
+  "discord":{
+    "token": ""
+  },
   "dispatcher": [
     {
       "module": "",
@@ -10,13 +13,17 @@
       "listenOnChannels": [  ]
     }
   ],
-  "github": {
-    "repositories": [
-      {
-        "owner": "",
-        "name": "",
-        "listenOnChannels": [  ]
-      }
-    ]
+  "modules": {
+    "github": {
+	    "username": "",
+      "token": "",
+      "repositories": [
+        {
+          "owner": "",
+          "name": "",
+          "listenOnChannels": [  ]
+        }
+      ]
+    }
   }
 }
