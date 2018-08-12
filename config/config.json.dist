@@ -1,0 +1,22 @@
+{
+  "command": {
+    "prefix": "!"
+  },
+  "dispatcher": [
+    {
+      "module": "",
+      "action": "",
+      "commands": [  ],
+      "listenOnChannels": [  ]
+    }
+  ],
+  "github": {
+    "repositories": [
+      {
+        "owner": "",
+        "name": "",
+        "listenOnChannels": [  ]
+      }
+    ]
+  }
+}
