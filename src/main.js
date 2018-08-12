@@ -1,7 +1,5 @@
 const CommunityDiscordBot = require( "./CommunityDiscordBot" );
-const cdb = new CommunityDiscordBot({
-  auth: require( "../config/auth.json" ),
-  config: require( "../config/config.json" )
-});
+const config = require( "../config/config.json" );
+const cdb = new CommunityDiscordBot( config );
 cdb.init();
 cdb.listen();
