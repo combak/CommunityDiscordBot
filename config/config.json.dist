@@ -2,8 +2,10 @@
   "command": {
     "prefix": "!"
   },
-  "discord":{
-    "token": ""
+  "discord": {
+    "auth": {
+      "token": ""
+    }
   },
   "dispatcher": [
     {
@@ -15,8 +17,10 @@
   ],
   "modules": {
     "github": {
-	    "username": "",
-      "token": "",
+      "auth": {
+    		"username": "",
+        "token": ""
+      },
       "repositories": [
         {
           "owner": "",
