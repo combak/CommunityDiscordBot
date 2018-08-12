@@ -1,5 +1,2 @@
+/config/*.json
 /node_modules/
-
-
-auth.json
-config.json
