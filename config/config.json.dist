@@ -16,6 +16,11 @@
           "factory": "modules/github/IssueCommandFactory.js",
           "commands": [ "issue" ],
           "listenOnChannels": [  ]
+        },
+        {
+          "factory": "modules/github/IssuesCommandFactory.js",
+          "commands": [ "issues" ],
+          "listenOnChannels": [  ]
         }
       ]
     },
