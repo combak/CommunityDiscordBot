@@ -1,38 +1,35 @@
 "use strict";
-const Discord = require( "discord.js" );
-const Dispatcher = require( "./Dispatcher.js" );
+const path = require( "path" );
+const ServiceLocator = require( path.resolve( __srcdir, "service/ServiceLocator.js" ) );
 
 class CommunityDiscordBot
 {
   constructor( config = {} )
   {
     this.config = config;
-
-    this.bot = new Discord.Client();
-    this.bot.commands = new Discord.Collection();
-
-    this.dispatcher = new Dispatcher( this.bot, this.config.dispatcher, this.config.modules );
+    this.services = new ServiceLocator( this.config.services );
   }
 
   init()
   {
-    //Dispatcher
-    this.dispatcher.init();
+    this.discord = this.services.get( "discord" );
+    this.dispatcher = this.services.get( "dispatcher" );
 
     //Discord Client (Bot)
-    this.bot.on( "ready", async () => console.log( `${this.bot.user.username} is online.`) );
-    this.bot.on( "message", async message => {
+    this.discord.client.on( "ready", async () => {
+      console.log( `${this.discord.client.user.username} is online.`)
+    });
+    this.discord.client.on( "message", async message => {
       if( message.author.bot ) return;
       if( message.content.charAt(0) != this.config.command.prefix ) return;
 
-      //Dispatch Request
       this.dispatcher.dispatch( message );
      });
   }
 
   listen()
   {
-    this.bot.login( this.config.discord.auth.token )
+    this.discord.login()
       .catch( err => console.log( err ) );
   }
 }
