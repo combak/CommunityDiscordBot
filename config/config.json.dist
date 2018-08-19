@@ -2,21 +2,25 @@
   "command": {
     "prefix": "!"
   },
-  "discord": {
-    "auth": {
-      "token": ""
-    }
-  },
-  "dispatcher": [
-    {
-      "module": "",
-      "action": "",
-      "commands": [  ],
-      "listenOnChannels": [  ]
-    }
-  ],
-  "modules": {
+  "services": {
+    "discord": {
+      "factory": "src/service/DiscordServiceFactory.js",
+      "auth": {
+        "token": ""
+      }
+    },
+    "dispatcher": {
+      "factory": "src/service/DispatchingServiceFactory.js",
+      "commands":[
+        {
+          "factory": "modules/github/IssueCommandFactory.js",
+          "commands": [ "issue" ],
+          "listenOnChannels": [  ]
+        }
+      ]
+    },
     "github": {
+      "factory": "modules/github/GithubServiceFactory.js",
       "auth": {
     		"username": "",
         "token": ""
