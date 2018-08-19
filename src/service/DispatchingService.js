@@ -1,20 +1,23 @@
 "use strict";
+const path = require( "path" );
+const Service = require( "./Service.js" );
 
-class Dispatcher
+class DispatchingService extends Service
 {
-  constructor( bot, config = {}, modules = {} )
+  constructor( discord, config = {} )
   {
-    this.bot = bot;
-    this.config = config;
-    this.modules = modules;
-    this.listenOnChannels = [];
+    super( config );
+
+    this.discord = discord;
   }
 
   init()
   {
-    this.config.forEach( element => {
+    this.listenOnChannels = [];
+
+    this.config.commands.forEach( element => {
       element.listenOnChannels.forEach( channel => this.listenOnChannels.push( channel ) );
-      element.commands.forEach( command => this.bot.commands.set( command, element ) );
+      element.commands.forEach( command => this.discord.client.commands.set( command, element ) );
     });
   }
 
@@ -26,15 +29,15 @@ class Dispatcher
 
     let cmdString = message.content.replace(/ .*/,'').slice( 1 );
     message.content = message.content.slice( cmdString.length + 2 );
-    let command = this.bot.commands.get( cmdString );
-
+    let command = this.discord.client.commands.get( cmdString );
+    console.log( command );
     if( command === undefined )
     {
       return message.channel.send( `Ich befürchte, dass ich das nicht tun kann, ${message.author.username}` )
         .then( msg => msg.delete( 10000 ) );
     }
-    let action = require( `./modules/${command.module}/${command.action}`);
+    let action = require( path.resolve( __modulesdir, `${command.module}/${command.action}`) );
     action.execute( message, this.modules[ command.module ] );
   }
 }
-module.exports = Dispatcher;
+module.exports = DispatchingService;
