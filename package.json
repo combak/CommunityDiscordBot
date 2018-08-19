@@ -2,9 +2,9 @@
   "name": "communitydiscordbot",
   "version": "0.1.0",
   "description": "Community Discord Bot",
-  "main": "./src/main.js",
+  "main": "./main.js",
   "scripts": {
-    "start": "node ./src/main.js",
+    "start": "node ./main.js",
     "test": "echo \\\\\\\"Error: no test specified! Configure in package.json\\\\\\\" && exit 1"
   },
   "repository": {
