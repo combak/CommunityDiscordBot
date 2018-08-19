@@ -4,11 +4,12 @@ const Service = require( "./Service.js" );
 
 class DispatchingService extends Service
 {
-  constructor( discord, config = {} )
+  constructor( services, config = {} )
   {
     super( config );
 
-    this.discord = discord;
+    this.services = services;
+    this.discord = services.get( "discord" );
   }
 
   init()
@@ -30,7 +31,7 @@ class DispatchingService extends Service
     let cmdString = message.content.replace(/ .*/,'').slice( 1 );
     message.content = message.content.slice( cmdString.length + 2 );
     let command = this.discord.client.commands.get( cmdString );
-    console.log( command );
+    
     if( command === undefined )
     {
       return message.channel.send( `Ich befürchte, dass ich das nicht tun kann, ${message.author.username}` )
