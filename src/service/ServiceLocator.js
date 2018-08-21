@@ -1,37 +1,60 @@
-"use strict";
 const path = require( "path" );
 
+/**
+ * Creates, provides and manages services
+ */
 class ServiceLocator
 {
-  constructor( config = {} )
-  {
-    this.config = config;
-    this.services = new Map();
-  }
+	/**
+	 * @param {Object} config - Configuration for all available services
+	 */
+	constructor( config = {} )
+	{
+		this.config = config;
+		this.services = new Map();
+	}
 
-  _createService( name )
-  {
-    let config = this.config[ name ];
-    if( config === undefined ) throw `'${name}' is an unknown service`;
-    let service = require( path.resolve( __basedir, `${config.factory}` ) );
+	/**
+	 * Create and initialize an service object
+	 * 
+	 * @private
+	 * @param {string} name - Name of the service
+	 * 
+	 * @return {Service} Service object
+	 */
+	_createService( name )
+	{
+		let config = this.config[ name ];
+		if( config === undefined ) { throw `'${name}' is an unknown service`; }
+		let serviceFactory = require( path.resolve( global.__basedir, `${config.factory}` ) );
+		let service = serviceFactory.factory( this, config );
+		
+		service.init();
+		
+		return service;
+	}
 
-    return service.factory( this, config );
-  }
+	/**
+	 * Request an service object
+	 * 
+	 * @param {string} name - Name of the service
+	 * 
+	 * @return {Service} Service object
+	 */	
+	get( name )
+	{
+		let service;
 
-  get( name )
-  {
-    let service;
-
-    if( this.services.has( name ) )
-    {
-      service = this.services.get( name );
-    }
-    else
-    {
-      service = this._createService( name );
-      this.services.set( name, service );
-    }
-    return service;
-  }
+		if( this.services.has( name ) )
+		{
+			service = this.services.get( name );
+		}
+		else
+		{
+			service = this._createService( name );
+			this.services.set( name, service );
+		}
+		return service;
+	}
 }
 module.exports = ServiceLocator;

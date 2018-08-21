@@ -1,14 +1,16 @@
 "use strict";
-const path = require( "path" );
-const ServiceLocator = require( path.resolve( __srcdir, "service/ServiceLocator.js" ) );
+const ServiceLocator = require( "./service/ServiceLocator.js" );
 
 class CommunityDiscordBot
 {
-  constructor( config = {} )
-  {
-    this.config = config;
-    this.services = new ServiceLocator( this.config.services );
-  }
+	/**
+	 * @param  {Object} 
+	 */
+	constructor( config = {} )
+	{
+		this.config = config;
+		this.services = new ServiceLocator( this.config.services );
+	}
 
   init()
   {
@@ -17,7 +19,7 @@ class CommunityDiscordBot
 
     //Discord Client (Bot)
     this.discord.client.on( "ready", async () => {
-      console.log( `${this.discord.client.user.username} is online.`)
+      console.log( `${this.discord.client.user.username} is online.`);
     });
     this.discord.client.on( "message", async message => {
       if( message.author.bot ) return;

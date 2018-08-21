@@ -1,7 +1,19 @@
-"use strict";
-
+/**
+ * Command "interface"
+ */
 class Command
 {
-  execute() {}
+	/**
+	 *  @param {Object} options - Additional command options
+	 */
+	constructor( options = {} )
+	{
+		this.options = options;
+	}
+	
+	/**
+	 * Execute this command
+	 */
+	execute() {}
 }
 module.exports = Command;

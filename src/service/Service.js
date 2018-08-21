@@ -1,12 +1,19 @@
-"use strict";
-
+/**
+ * Service "interface"
+ */
 class Service
 {
-  constructor( config = {} )
-  {
-    this.config = config;
-  }
+	/**
+	 * @param {Object} config - Service configuration.
+	 */
+	constructor( config = {} )
+	{
+		this.config = config;
+	}
 
-  init() {}
+	/**
+	 * Initialize this service.
+	 */
+	init() {}
 }
 module.exports = Service;
