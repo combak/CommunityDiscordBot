@@ -1,18 +1,26 @@
-"use strict";
 const path = require( "path" );
 const Github = require( "github-api" );
-const Service = require( path.resolve( __srcdir, "service/Service.js" ) );
+const Service = require( path.resolve( global.__srcdir, "service/Service.js" ) );
 
+/**
+ * @extends {Service}
+ */
 class GithubService extends Service
 {
-  init()
-  {
-    this.connection = new Github( this.config.auth );
-  }
+	/**
+	 * Initilize Github connection
+	 */
+	init()
+	{
+		this.connection = new Github( this.config.auth );
+	}
 
-  getRepos()
-  {
-    return this.config.repositories;
-  }
+	/**
+	 * Return available Repositories
+	 */
+	getRepos()
+	{
+		return this.config.repositories;
+	}
 }
 module.exports = GithubService;
